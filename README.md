@@ -8,7 +8,10 @@
 - PATH 里没有 `pnpm`、`gh`；`git` 在 `C:\Program Files\Git\cmd\git.exe`。
 - 网络：`github.com:443` 的 git smart-http 被阻断（页面能开、`/info/refs` 超时），但 `api.github.com`、`raw.githubusercontent.com`、`codeload.github.com` 正常，速度约 0.5 MB/s。
 - 全局 git 配置用 `ghproxy.net` 做 `insteadOf` 镜像（原来的 `gh-proxy.com` 已关停，旧配置备份在 `~/.gitconfig.bak-20261122`）。
-- SSH 走 `ssh.github.com:443`；公钥 `~/.ssh/id_ed25519.pub` 需登记到 GitHub 后才能 push。
+- SSH 走 `ssh.github.com:443`；公钥 `~/.ssh/id_ed25519.pub` 已登记到 GitHub（账号 `1afaf8`）。
+  `~/.ssh/config` 必须是**无 BOM** 的 ASCII：PS 5.1 的 `Set-Content -Encoding utf8` 会加 BOM，
+  于是 git 自带的 ssh 报 `Bad configuration option: \357\273\277host`（系统 OpenSSH 反而能容忍）。
+  写入用 `[System.IO.File]::WriteAllText($p, $text, (New-Object System.Text.UTF8Encoding($false)))`。
 
 ## 工具
 
