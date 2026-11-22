@@ -22,6 +22,27 @@
   powershell -NoProfile -File bin\ghget.ps1 -Repo owner/repo -Ref refs/heads/dev -Out D:\src\repo
   ```
 
+## 提交与推送
+
+`push.ps1`（仓库根目录）一条命令走完 **add → commit → push**：
+
+```powershell
+.\push.ps1                          # 交互式，会提示你输入 commit 信息
+.\push.ps1 -Message "feat: 登录页"   # 直接带信息，适合脚本/自动化
+.\push.ps1 -Message "wip" -NoPush    # 只提交，不推送
+```
+
+行为约定：
+
+- 固定操作**脚本所在的仓库**，在哪个目录调用都一样。
+- `git add -A`，新增、修改、删除、重命名都会进暂存区。
+- 工作区干净时打印黄字 `Nothing to commit` 并返回 0，不算失败。
+- commit 信息为空则直接中止，已暂存的内容原样保留。
+- 首次推送会自动 `git push -u origin HEAD`，之后直接 `git push`。
+- 结束时打印 short sha、分支和推送结果。
+
+约定：**以后写完代码，直接 `.\push.ps1 -Message "..."` 收尾**，不用手敲三条 git 命令。
+
 ## 已装的 DSH 插件（profile: desktop）
 
 billion-context、modlens、dsh-vision-router、dsh-our-free-model、hindsight、OpenViking、
