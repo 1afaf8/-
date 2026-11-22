@@ -1,0 +1,14 @@
+# 缓存与构建产物
+.cache/
+node_modules/
+*.tgz
+*.tar.gz
+*.zip
+*.log
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store
