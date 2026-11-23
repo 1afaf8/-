@@ -43,6 +43,33 @@
 
 约定：**以后写完代码，直接 `.\push.ps1 -Message "..."` 收尾**，不用手敲三条 git 命令。
 
+## 用 Gemini
+
+本机**直连 Google 全部超时**，必须先开 Clash Verge（`C:\Program Files\Clash Verge\clash-verge.exe`，
+起来后 `verge-mihomo.exe` 监听 `127.0.0.1:7897`）。2026-11-23 实测出口是香港（183.179.43.252）。
+
+走 7897 之后各通道的实测结果：
+
+| 通道 | 端点 | 结果 |
+|---|---|---|
+| AI Studio API key | `generativelanguage.googleapis.com` | 通，key 无效时返回 `400 API_KEY_INVALID` |
+| Gemini 网页 | `gemini.google.com` | 通，200 |
+| Antigravity / Cloud Code Assist | `cloudcode-pa.googleapis.com`、`daily-cloudcode-pa.sandbox.googleapis.com` | 通，无凭据时 `401` |
+| Antigravity 主端点 | `daily-cloudcode-pa.googleapis.com` | **不通**（TLS 被重置），走 daily 优先的插件要靠 sandbox 兜底 |
+| Vertex AI | `aiplatform.googleapis.com` | 通，但要开通 Vertex AI 并绑计费项目 |
+| Gemini 网页 cookie 逆向（gemini-webapi 一类） | — | **不建议**，cookie 会被轮换、违反 ToS |
+
+所以「用上 Gemini」只差凭据，三条路按门槛从低到高：
+
+1. **AI Studio 免费 API key**（只要一个 Google 账号，不要钱）——去 `aistudio.google.com/apikey` 建，
+   有免费额度限制。把 key 发我即可接到 DSH。
+2. **Google AI Pro 订阅**（走 Antigravity 通道，吃订阅额度）——`dsh-gemini-pool` 这类插件支持浏览器登录，
+   但主端点不通时只能靠 sandbox 端点，稳定性打折。
+3. **Vertex AI**——要 Google Cloud 项目 + 计费，适合长期、量大。
+
+注意：`aa2246740/dsh-antigravity-oauth` 这类逆向 OAuth 的插件 README 自述**有封号风险**，不要装。
+纯本地跑 Gemini（`gemma`）可以用 Ollama，不联网、不要账号，但能力和云端 Gemini 不是一个量级。
+
 ## 本地 skills（用户级）
 
 装在 `C:\Users\ASUS\.dsh\skills\`，DSH 自动发现，任何项目都能调用（豆包 2026-11-23 写的一套编码流程技能）：
