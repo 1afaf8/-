@@ -17,6 +17,11 @@
   1. 截图窗口区域：`Graphics.CopyFromScreen`
   2. 读屏：`powershell -NoProfile -ExecutionPolicy Bypass -File bin\ocr.ps1 -Path <png>`
   3. 输入：`Set-Clipboard` + `SendKeys ^v` + `{ENTER}`；窗口找 `Chrome_WidgetWin_1` 且 Name 以 ` - 豆包` 结尾
+- **额度怎么算（问过豆包本人，2026-11-23）**：官方没公布固定次数，任务模式的额度是动态的，按任务复杂度扣；
+  免费额度按自然日重置，**北京时间 0 点刷新**；免费版界面上**看不到剩余额度**，只有耗尽时才会弹提示。
+  付费版（专业版）在「左下角头像 → 额度状态 → AI 额度」能看到消耗进度，但那只算付费池，不含免费额度。
+  → 实操含义：没法提前算余量，就按"每天至少外派 1–2 个任务、复杂任务优先给她"来用；
+  她一旦提示额度用尽，就立刻切回自己干，别在那上面反复试。
 - 单次任务耗时通常 2～10 分钟，用后台 job 轮询，别干等。
 - **她的产物直接落盘**：`C:\Users\ASUS\Doubao\chats\<日期>\<会话>\`（例如
   `C:\Users\ASUS\Doubao\chats\2026-11-23\new-chat\clean-caches.ps1`）。让她"写成文件"比让她"贴在聊天里"更好，
