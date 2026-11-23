@@ -43,6 +43,20 @@
 
 约定：**以后写完代码，直接 `.\push.ps1 -Message "..."` 收尾**，不用手敲三条 git 命令。
 
+## 本地 skills（用户级）
+
+装在 `C:\Users\ASUS\.dsh\skills\`，DSH 自动发现，任何项目都能调用（豆包 2026-11-23 写的一套编码流程技能）：
+
+| skill | 用途 | 什么时候触发 |
+|---|---|---|
+| `repo-onboarding` | 用最少读取量产出 `.agent/REPO_MAP.md` 代码地图 | 第一次进仓库、在陌生模块改代码 |
+| `test-fix-loop` | 测试/CI 变绿的闭环，禁止改断言绕过 | 测试挂了、CI 红、类型检查报错 |
+| `bug-triage` | 复现 → 二分 → 根因假设 → 回归用例 | 报错/崩溃，原因未知 |
+| `diff-review` | 提交前自审 diff，挡密钥和调试残留 | 准备提交、发 PR、任务收尾 |
+| `refactor-migration` | 跨文件机械改造，每步可验证可回滚 | 重命名、改签名、换库、搬迁 |
+
+每个技能是一个文件夹 + `SKILL.md`（frontmatter 的 `description` 决定路由，触发词写在那里）。
+
 ## 已装的 DSH 插件（profile: desktop）
 
 billion-context、modlens、dsh-vision-router、dsh-our-free-model、hindsight、OpenViking、
