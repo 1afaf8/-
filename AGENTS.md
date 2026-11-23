@@ -18,6 +18,9 @@
   2. 读屏：`powershell -NoProfile -ExecutionPolicy Bypass -File bin\ocr.ps1 -Path <png>`
   3. 输入：`Set-Clipboard` + `SendKeys ^v` + `{ENTER}`；窗口找 `Chrome_WidgetWin_1` 且 Name 以 ` - 豆包` 结尾
 - 单次任务耗时通常 2～10 分钟，用后台 job 轮询，别干等。
+- **她的产物直接落盘**：`C:\Users\ASUS\Doubao\chats\<日期>\<会话>\`（例如
+  `C:\Users\ASUS\Doubao\chats\2026-11-23\new-chat\clean-caches.ps1`）。让她"写成文件"比让她"贴在聊天里"更好，
+  之后直接从磁盘读，不用截图 OCR。
 
 ## 2. 收尾一律走 push.ps1
 
